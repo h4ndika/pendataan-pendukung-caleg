@@ -26,6 +26,7 @@ class AnggotaResource extends JsonResource
                 'email',
                 'phone',
             ]),
+            'wilayah' => new WilayahResource($this->whenLoaded('wilayahs')),
         ];
     }
 }

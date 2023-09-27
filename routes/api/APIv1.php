@@ -3,6 +3,7 @@
 use App\Http\Controllers\APIv1\AnggotaController;
 use App\Http\Controllers\APIv1\Auth\AuthController;
 use App\Http\Controllers\APIv1\KetuaController;
+use App\Http\Controllers\APIv1\WilayahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,4 @@ Route::prefix('auth')->namespace('Auth')->group(function () {
 
 Route::apiResource('anggotas', AnggotaController::class);
 Route::apiResource('ketuas', KetuaController::class);
+Route::apiResource('wilayahs', WilayahController::class);

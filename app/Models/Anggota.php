@@ -21,6 +21,7 @@ class Anggota extends Authenticatable implements JWTSubject
 
     protected $with = [
         'ketuas',
+        'wilayahs',
     ];
 
     /**
@@ -98,5 +99,10 @@ class Anggota extends Authenticatable implements JWTSubject
     public function ketuas()
     {
         return $this->belongsTo(Ketua::class, 'ketua_id')->withTrashed();
+    }
+
+    public function wilayahs()
+    {
+        return $this->hasMany(Wilayah::class, 'anggota_id', 'id');
     }
 }
