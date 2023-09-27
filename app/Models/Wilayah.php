@@ -22,4 +22,9 @@ class Wilayah extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function anggotas()
+    {
+        return $this->belongsTo(Anggota::class, 'anggota_id')->withTrashed();
+    }
 }
