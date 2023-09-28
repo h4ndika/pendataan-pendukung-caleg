@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Wilayah extends Model
+class Pendukung extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -23,13 +23,8 @@ class Wilayah extends Model
         'deleted_at'
     ];
 
-    public function anggotas()
+    public function wilayahs()
     {
-        return $this->belongsTo(Anggota::class, 'anggota_id')->withTrashed();
-    }
-
-    public function pendukungs()
-    {
-        return $this->hasMany(Pendukung::class, 'wilayah_id');
+        return $this->belongsTo(Wilayah::class, 'wilayah_id')->withTrashed();
     }
 }
