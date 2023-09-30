@@ -27,6 +27,9 @@ class AnggotaResource extends JsonResource
                 'phone',
             ]),
             'wilayah' => new WilayahResource($this->whenLoaded('wilayahs')),
+            'action' => '<button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit"
+            onclick=\'editdata('.$this->id.')\'>Update</button>
+        <button class="btn btn-danger" onclick=\'deletedata('.$this->id.')\'>Delete</button>'
         ];
     }
 }

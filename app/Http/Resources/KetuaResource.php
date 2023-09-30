@@ -14,6 +14,15 @@ class KetuaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'action' => '<button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit"
+            onclick=\'editdata('.$this->id.')\'>Update</button>
+        <button class="btn btn-danger" onclick=\'deletedata('.$this->id.')\'>Delete</button>'
+        ];
     }
 }
