@@ -30,8 +30,9 @@ class AnggotaController extends Controller
         $data = QueryBuilder::for(Anggota::class)
             ->allowedFilters([
                 AllowedFilter::partial('name'),
+                AllowedFilter::partial('username'),
                 AllowedFilter::partial('email'),
-                AllowedFilter::exact('phone'),
+                AllowedFilter::partial('phone'),
             ])->orderBy('id', 'DESC');
 
         return AnggotaResource::collection($data->paginate(min($paginate, 50)));

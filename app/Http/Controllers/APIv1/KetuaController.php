@@ -30,8 +30,9 @@ class KetuaController extends Controller
         $data = QueryBuilder::for(Ketua::class)
             ->allowedFilters([
                 AllowedFilter::partial('name'),
+                AllowedFilter::partial('username'),
                 AllowedFilter::partial('email'),
-                AllowedFilter::exact('phone'),
+                AllowedFilter::partial('phone'),
             ])->orderBy('id', 'DESC');
 
         return KetuaResource::collection($data->paginate(min($paginate, 50)));
