@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\APIv1;
 
+use App\Models\Anggota;
 use App\Models\Wilayah;
 use App\Http\Resources\WilayahResource;
 use App\Http\Controllers\Controller;
@@ -31,6 +32,10 @@ class WilayahController extends Controller
                 AllowedFilter::partial('nama_wilayah'),
                 AllowedFilter::exact('anggota_id'),
             ])->orderBy('id', 'DESC');
+
+        if (auth()->user() instanceof Anggota) {
+            $data = $data->where('anggota_id', auth()->user()->id);
+        }
 
         return WilayahResource::collection($data->paginate(min($paginate, 50)));
     }
