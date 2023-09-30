@@ -375,7 +375,7 @@ $('#formupdate').on('submit', function(e) {
     var datas = $("#formupdate").serialize();
 
     $.ajax({
-        type: "POST",
+        type: "PATCH",
         url: "{{ url('') }}/api/v1/{{$endpoint}}/"+id,
         dataType: "json",
         beforeSend: function (xhr) {
