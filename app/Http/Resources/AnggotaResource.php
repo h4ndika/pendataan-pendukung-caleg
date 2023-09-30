@@ -26,7 +26,10 @@ class AnggotaResource extends JsonResource
                 'email',
                 'phone',
             ]),
-            'wilayah' => new WilayahResource($this->whenLoaded('wilayahs')),
+            'wilayah' => collect($this->whenLoaded('wilayahs'))->only([
+                'id',
+                'nama_wilayah',
+            ]),
             'action' => '<button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit"
             onclick=\'editdata('.$this->id.')\'>Update</button>
         <button class="btn btn-danger" onclick=\'deletedata('.$this->id.')\'>Delete</button>'
