@@ -27,7 +27,7 @@ class AnggotaCreateRequest extends FormRequest
             'password' => 'required|string|min:6',
             'email' => 'required|email|unique:anggotas,email',
             'phone' => 'required|numeric',
-            'ketua_id' => 'required|exists:ketuas,id',
+            // 'ketua_id' => 'required|exists:ketuas,id',
         ];
     }
 }

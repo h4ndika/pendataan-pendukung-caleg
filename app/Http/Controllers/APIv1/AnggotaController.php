@@ -47,8 +47,11 @@ class AnggotaController extends Controller
     public function store(AnggotaCreateRequest $request)
     {
         $data = $request->validated();
+        $Anggota = Anggota::create($data);
+        $Anggota->ketua_id = auth()->user()->id;
+        $Anggota->save();
 
-        return (new AnggotaResource(Anggota::create($data)))
+        return (new AnggotaResource($Anggota->fresh()))
             ->response()
             ->setStatusCode(201);
     }
