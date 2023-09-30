@@ -136,10 +136,11 @@
                                     <div class="row">
                                         <div class="col-auto">
                                             Search: <select name="filterby" id="filterby" class="form-select form-select-sm" >
-                                                <option selected>name</option>
-                                                <option>username</option>
-                                                <option>email</option>
-                                                <option>phone</option>
+                                                @foreach ($tables as $table)
+                                                    @if ($table['rowdata'] != 'action')
+                                                        <option value="{{$table['rowdata']}}">{{$table['head']}}</option>
+                                                    @endif
+                                                @endforeach
                                               </select>
                                         </div>
                                         <div class="col-auto">
