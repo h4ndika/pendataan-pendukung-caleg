@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-@include('admin.sidebar')
+@include('ketua.sidebar')
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -243,16 +243,27 @@
                 $('#paginate').html(paginate);
 
                 }).fail(function(jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status == '401') {
                     Toastify({
                         text: "Session Telah Berakhir, Silahkan Login ulang",
                         duration: 3000,
                         close: true,
                         backgroundColor: "#dc3545",
                     }).showToast()
+
                     localStorage.clear();
                     setTimeout(() => {
                         window.location = "{{url('')}}"
                     }, 300);
+                } else {
+                    var msg = jqXHR.responseJSON.message;
+                    Toastify({
+                        text: msg,
+                        duration: 3000,
+                        close: true,
+                        backgroundColor: "#dc3545",
+                    }).showToast()
+                }
                 })
             }, 500);
         }
@@ -276,16 +287,27 @@
                     $('#edit{{$input['name']}}').val(data.data.{{$input['row'] ?? $input['name']}});
                     @endforeach
                 }).fail(function(jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == '401') {
                     Toastify({
-                        text: "Session Expired, Please Login again",
+                        text: "Session Telah Berakhir, Silahkan Login ulang",
                         duration: 3000,
                         close: true,
                         backgroundColor: "#dc3545",
                     }).showToast()
+
                     localStorage.clear();
                     setTimeout(() => {
                         window.location = "{{url('')}}"
                     }, 300);
+                } else {
+                    var msg = jqXHR.responseJSON.message;
+                    Toastify({
+                        text: msg,
+                        duration: 3000,
+                        close: true,
+                        backgroundColor: "#dc3545",
+                    }).showToast()
+                }
                 })
             }, 100);
         }
@@ -368,7 +390,7 @@ $('#formupdate').on('submit', function(e) {
             backgroundColor: "#198754",
         }).showToast()
         loadtable("{{url('')}}/api/v1/{{$endpoint}}");
-        $('#add').modal('hide')
+        $('#edit').modal('hide')
         document.getElementById("forminput").reset();
     }).fail(function(jqXHR, textStatus, errorThrown) {
         if (jqXHR.status == '401') {
