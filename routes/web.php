@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminWebController;
 use App\Http\Controllers\LoginWebController;
+use App\Http\Controllers\KetuaWebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,10 @@ Route::group(['prefix'=>'admin'], function(){
     //Dashboard
     Route::get('/', [AdminWebController::class, 'index']);
     Route::get('/timses', [AdminWebController::class, 'timses']);
+});
+
+Route::group(['prefix'=>'ketua'], function(){
+    //Dashboard
+    Route::get('/', [KetuaWebController::class, 'index']);
+    Route::get('/anggota', [KetuaWebController::class, 'anggota']);
 });
