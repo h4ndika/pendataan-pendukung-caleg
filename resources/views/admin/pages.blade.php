@@ -76,13 +76,17 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                                            <small>*ceklis data yang ingin diubah</small>
                                             <form id="formupdate">
                                                 <input type="hidden" id="editid" value="">
                                                 @foreach ($form as $input)
                                                 @if ($input['type'] == 'select')
                                                 <div class="mb-3">
-                                                    <label class="form-label">{{ucwords($input['label'] ?? $input['name'])}}</label>
-                                                    <select name="{{$input['name']}}" class="form-control" id="edit{{$input['name']}}">
+                                                    <label class="form-label">
+                                                        <input type="checkbox" id="chkd{{$input['name']}}" onclick='checkupdate("{{$input['name']}}")'>
+                                                        {{ucwords($input['label'] ?? $input['name'])}}
+                                                    </label>
+                                                    <select name="{{$input['name']}}" class="form-control" id="edit{{$input['name']}}" disabled>
                                                         @foreach ($input['option'] as $option)
                                                             <option value="{{$option['value']}}">{{ucwords($option['label'] ?? $option['value'])}}</option>
                                                         @endforeach
@@ -90,13 +94,19 @@
                                                 </div>
                                                 @elseif ($input['type'] == 'textarea')
                                                 <div class="mb-3">
-                                                    <label class="form-label">{{ucwords($input['label'] ?? $input['name'])}}</label>
-                                                    <textarea type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}"></textarea>
+                                                    <label class="form-label">
+                                                        <input type="checkbox" id="chkd{{$input['name']}}" onclick='checkupdate("{{$input['name']}}")'>
+                                                        {{ucwords($input['label'] ?? $input['name'])}}
+                                                    </label>
+                                                    <textarea type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}" disabled></textarea>
                                                 </div>
                                                 @else
                                                 <div class="mb-3">
-                                                    <label class="form-label">{{ucwords($input['label'] ?? $input['name'])}}</label>
-                                                    <input type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}" value="{{$input['default'] ?? ''}}">
+                                                    <label class="form-label">
+                                                        <input type="checkbox" id="chkd{{$input['name']}}" onclick='checkupdate("{{$input['name']}}")'>
+                                                        {{ucwords($input['label'] ?? $input['name'])}}
+                                                    </label>
+                                                    <input type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}" value="{{$input['default'] ?? ''}}" disabled>
                                                 </div>
                                                 @endif
 
@@ -310,6 +320,14 @@
                 }
                 })
             }, 100);
+        }
+
+        function checkupdate(value) {
+            if ($('#chkd'+value).is(":checked")) {
+                $('#edit'+value).prop('disabled', false);
+            } else {
+                $('#edit'+value).prop('disabled', true);
+            }
         }
 
     $(document).ready(function() {
