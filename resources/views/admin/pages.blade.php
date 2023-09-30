@@ -82,7 +82,7 @@
                                                 @if ($input['type'] == 'select')
                                                 <div class="mb-3">
                                                     <label class="form-label">{{ucwords($input['label'] ?? $input['name'])}}</label>
-                                                    <select name="{{$input['name']}}" class="form-control" id="edit{{$input['name']}}" required>
+                                                    <select name="{{$input['name']}}" class="form-control" id="edit{{$input['name']}}">
                                                         @foreach ($input['option'] as $option)
                                                             <option value="{{$option['value']}}">{{ucwords($option['label'] ?? $option['value'])}}</option>
                                                         @endforeach
@@ -91,12 +91,12 @@
                                                 @elseif ($input['type'] == 'textarea')
                                                 <div class="mb-3">
                                                     <label class="form-label">{{ucwords($input['label'] ?? $input['name'])}}</label>
-                                                    <textarea type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}" required></textarea>
+                                                    <textarea type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}"></textarea>
                                                 </div>
                                                 @else
                                                 <div class="mb-3">
                                                     <label class="form-label">{{ucwords($input['label'] ?? $input['name'])}}</label>
-                                                    <input type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}" value="{{$input['default'] ?? ''}}" required>
+                                                    <input type="{{$input['type']}}" class="form-control" id="edit{{$input['name']}}" name="{{$input['name']}}" value="{{$input['default'] ?? ''}}">
                                                 </div>
                                                 @endif
 
