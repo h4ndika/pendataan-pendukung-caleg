@@ -33,7 +33,9 @@ class AnggotaController extends Controller
                 AllowedFilter::partial('username'),
                 AllowedFilter::partial('email'),
                 AllowedFilter::partial('phone'),
-            ])->orderBy('id', 'DESC');
+            ])
+            ->where('ketua_id', auth()->user()->id)
+            ->orderBy('id', 'DESC');
 
         return AnggotaResource::collection($data->paginate(min($paginate, 50)));
     }
