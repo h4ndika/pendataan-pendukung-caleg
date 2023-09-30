@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-@include('ketua.sidebar')
+@include('admin.sidebar')
 <main id="main" class="main">
 
     <div class="pagetitle">
