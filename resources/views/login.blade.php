@@ -56,7 +56,7 @@
 
                                     <div class="col-12">
                                         <label for="role" class="form-label">Role</label>
-                                        <select name="role" class="form-control" id="role">
+                                        <select name="role" class="form-select" id="role">
                                             <option value="admin">Admin</option>
                                             <option value="ketua">Ketua Timses</option>
                                             <option value="anggota">Anggota</option>
