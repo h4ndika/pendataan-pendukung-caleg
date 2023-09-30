@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminWebController;
+use App\Http\Controllers\LoginWebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
+});
+Route::get('/login', [LoginWebController::class, 'index']);
+Route::get('/logout', [LoginWebController::class, 'logout']);
+
+Route::group(['prefix'=>'admin'], function(){
+    //Dashboard
+    Route::get('/', [AdminWebController::class, 'index']);
+    Route::get('/timses', [AdminWebController::class, 'timses']);
 });
