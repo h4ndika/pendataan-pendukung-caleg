@@ -20,6 +20,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link <?=(preg_match('/pendukung/',$uri)) ? '' : 'collapsed'?>" href="{{url('')}}/ketua/pendukung">
+          <i class="fa-solid fa-list"></i>
+          <span>Data Pendukung</span>
+        </a>
+      </li>
+
 
     </ul>
 
