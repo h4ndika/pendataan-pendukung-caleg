@@ -58,6 +58,7 @@ class AuthController extends Controller
                 'access_token' => $token,
                 'token_type' => 'bearer',
                 'expires_in' => $activeTTL * 60,
+                'role' => $guard,
                 'data' => $data,
             ],
             $statusCode
