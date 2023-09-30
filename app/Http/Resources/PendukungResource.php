@@ -23,7 +23,7 @@ class PendukungResource extends JsonResource
             'tps' => $this->tps,
             'point' => $this->point,
             'keterangan' => $this->keterangan,
-            'wilayah' => collect($this->wilayahs)->only([
+            'wilayahs' => collect($this->wilayahs)->only([
                 'id',
                 'nama_wilayah',
             ]),
