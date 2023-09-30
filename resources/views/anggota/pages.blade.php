@@ -19,6 +19,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
+                            @if (count($form) > 0)
+
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">
                                 Tambah Data
                             </button>
@@ -119,7 +121,7 @@
                                 </div>
                             </div>
 
-
+                            @endif
                         </div>
 
                         <div class="row">
@@ -180,6 +182,7 @@
 @push('script')
 <script src="{{ url('') }}/assets/vendor/sweetalert2/sweetalert2.min.js"></script>
 <script src="{{ url('') }}/assets/vendor/toastify-js/src/toastify.js"></script>
+<script src="{{ url('') }}/assets/vendor/sorttable/sorttable.js"></script>
 <script>
     function paginate(value) {
         var search = $('#search').val();
@@ -207,7 +210,17 @@
                 }).done(function(data) {
                     $('#load_table').hide();
                     $('#tabelnya').show();
-                    $('#table').html(`<table id="table" class="table table-striped" style="width:100%">
+
+                    var isitable = '';
+                    data.data.forEach(row => {
+                        isitable += `<tr>
+                    @foreach ($tables as $table)
+                        <td>${row.{{$table['rowdata']}} ?? ''}</td>
+                    @endforeach
+			    </tr>`;
+                    });
+
+                    $('#table').html(`<table id="initable" class="table table-striped sortable" style="width:100%">
                                 <thead>
                                   <tr>
                                     @foreach ($tables as $table)
@@ -215,22 +228,11 @@
                                     @endforeach
                                   </tr>
                                 </thead>
-                                <tbody id="isitable">
+                                <tbody>
+                                    `+isitable+`
                                 </tbody>
 
                         </table>`);
-
-                    var isitable = '';
-                    data.data.forEach(row => {
-                        isitable += `<tr>
-                    @foreach ($tables as $table)
-                        <td>${row.{{$table['rowdata']}}}</td>
-                    @endforeach
-			    </tr>`;
-                    });
-
-
-                    $('#isitable').html(isitable);
 
                     $('#halaman').html(`<div class="row">
 	  <div class="col-sm-12 col-md-5">
@@ -253,6 +255,7 @@
 
                 $('#paginate').html(paginate);
 
+                sorttable.makeSortable(document.getElementById('initable'));
                 }).fail(function(jqXHR, textStatus, errorThrown) {
                 if (jqXHR.status == '401') {
                     Toastify({
@@ -279,6 +282,8 @@
             }, 500);
         }
         loadtable("{{url('')}}/api/v1/{{$endpoint}}");
+
+@if (count($form) > 0)
 
         function editdata(value) {
             @foreach ($form as $input)
@@ -493,5 +498,6 @@ Swal.fire({
 
 });
 }
+@endif
 </script>
 @endpush
