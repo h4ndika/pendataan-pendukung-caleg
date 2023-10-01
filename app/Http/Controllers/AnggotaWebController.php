@@ -41,7 +41,7 @@ class AnggotaWebController extends Controller
 			'title' => 'Data Pendukung',
             'endpoint' => 'pendukungs',
             'form' => [
-                ['name'=> 'wilayah_id', 'label' => ucwords('wilayah'), 'row' => 'wilayah.id', 'type' => 'select', 'option' => (function(){
+                ['name'=> 'wilayah_id', 'label' => ucwords('wilayah'), 'row' => 'wilayahs.id', 'type' => 'select', 'option' => (function(){
                     $option = [];
                     foreach (Wilayah::orderBy('id', 'DESC')->get() as $value) {
                         $option[] = ['value' => $value->id, 'label' => $value->nama_wilayah];

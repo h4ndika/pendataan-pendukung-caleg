@@ -27,6 +27,10 @@ class PendukungResource extends JsonResource
                 'id',
                 'nama_wilayah',
             ]),
+            'anggota' => collect($this->wilayahs->anggotas)->only([
+                'id',
+                'name',
+            ]),
             'action' => '<button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit"
             onclick=\'editdata('.$this->id.')\'>Update</button>
         <button class="btn btn-danger" onclick=\'deletedata('.$this->id.')\'>Delete</button>'

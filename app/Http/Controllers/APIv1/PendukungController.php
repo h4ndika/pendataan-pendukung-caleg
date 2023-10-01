@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APIv1;
 
 use App\Models\Anggota;
+use App\Models\Ketua;
 use App\Models\Pendukung;
 use App\Http\Resources\PendukungResource;
 use App\Http\Controllers\Controller;
@@ -28,6 +29,9 @@ class PendukungController extends Controller
         $paginate = $request->query('paginate', 15);
 
         $data = QueryBuilder::for(Pendukung::with(['wilayahs']))
+            ->allowedIncludes([
+                'wilayahs.anggotas'
+            ])
             ->allowedFilters([
                 AllowedFilter::partial('nama_pendukung'),
                 AllowedFilter::partial('phone'),
@@ -37,6 +41,7 @@ class PendukungController extends Controller
                 AllowedFilter::partial('point'),
                 AllowedFilter::partial('keterangan'),
                 AllowedFilter::partial('wilayahs.nama_wilayah'),
+                AllowedFilter::partial('anggota.name', 'wilayahs.anggotas.name'),
                 AllowedFilter::exact('wilayah_id'),
             ])->orderBy('id', 'DESC');
 
@@ -46,6 +51,19 @@ class PendukungController extends Controller
                 foreach (auth()->user()->wilayahs as $wil) {
                  $wilayah_id[] = $wil->id;
                 }
+                return $wilayah_id;
+             })());
+        }
+
+        if (auth()->user() instanceof Ketua) {
+            $data = $data->whereIn('wilayah_id', (function(){
+                $wilayah_id = [];
+                foreach (auth()->user()->anggotas as $agt) {
+                    foreach ($agt->wilayahs as $wil) {
+                        $wilayah_id[] = $wil->id;
+                    }
+                }
+
                 return $wilayah_id;
              })());
         }
