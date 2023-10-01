@@ -33,6 +33,7 @@ Route::group(['prefix'=>'ketua'], function(){
     //Dashboard
     Route::get('/', [KetuaWebController::class, 'index']);
     Route::get('/anggota', [KetuaWebController::class, 'anggota']);
+    Route::get('/pendukung', [KetuaWebController::class, 'pendukung']);
 });
 
 Route::group(['prefix'=>'anggota'], function(){

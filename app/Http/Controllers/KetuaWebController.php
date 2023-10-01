@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ketua;
+use App\Models\Wilayah;
 use Illuminate\Support\Facades\View;
 
 class KetuaWebController extends Controller
@@ -35,6 +35,29 @@ class KetuaWebController extends Controller
                 ['head' => ucwords('email'), 'rowdata'=> 'email'],
                 ['head' => ucwords('phone'), 'rowdata'=> 'phone'],
                 ['head' => ucwords('action'), 'rowdata'=> 'action'],
+            ],
+		);
+
+        return View::make('ketua/pages', $data);
+    }
+
+    public function pendukung()
+    {
+        $data = array
+		(
+			'title' => 'Data Pendukung',
+            'endpoint' => 'pendukungs',
+            'form' => [],
+            'tables' => [
+                ['head' => ucwords('anggota'), 'rowdata'=> 'anggota.name'],
+                ['head' => ucwords('wilayah'), 'rowdata'=> 'wilayahs.nama_wilayah'],
+                ['head' => ucwords('nama pendukung'), 'rowdata'=> 'nama_pendukung'],
+                ['head' => ucwords('No WA/HP'), 'rowdata'=> 'phone'],
+                ['head' => ucwords('rt'), 'rowdata'=> 'rt'],
+                ['head' => ucwords('rw'), 'rowdata'=> 'rw'],
+                ['head' => ucwords('tps'), 'rowdata'=> 'tps'],
+                ['head' => ucwords('point'), 'rowdata'=> 'point'],
+                ['head' => ucwords('keterangan'), 'rowdata'=> 'keterangan'],
             ],
 		);
 
